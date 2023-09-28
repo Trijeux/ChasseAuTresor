@@ -18,10 +18,16 @@ int main()
 
 	do
 	{
-		
 		treasureFound = Compar(Coordinate());
-		draw_game();
+
+		if (!treasureFound)
+		{
+			system("cls");
+		}
 		
+
+		draw_game();
+
 		a++;
 		if (a >= result)
 		{

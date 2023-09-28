@@ -69,6 +69,7 @@ bool Compar(int indexresult)
 {
 	if (Chest[indexresult] == tile::coffre_tresor)
 	{
+		system("cls");
 		GamePlayer[indexresult] = 2;
 		std::cout << "        ..::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..        " << std::endl;
 		std::cout << "    .-#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#=.    " << std::endl;
