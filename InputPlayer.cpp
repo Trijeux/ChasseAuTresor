@@ -6,9 +6,9 @@
 
 
 //Coordonnees
-int coordonnees()
+int Coordinate()
 {
-	bool ValidInput = true;
+	bool validInput = true;
 	std::string inputString;
 
 	//ligne x
@@ -22,54 +22,54 @@ int coordonnees()
 		std::cout << "entre ligne (un numero) entre " << 1 << "-" << WIDTH << std::endl;
 		std::getline(std::cin, inputString);
 
-		ValidInput = true;
+		validInput = true;
 
 		if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
 		{
 			std::cout << inputString << " n'est pas un nombre" << std::endl;
-			ValidInput = false;
+			validInput = false;
 		}
-		if (ValidInput)
+		if (validInput)
 		{
 			x = std::stoi(inputString);
 			if (x > WIDTH) x = WIDTH;
 			if (x < 1) x = 1;
 		}
 
-	} while (!ValidInput);
+	} while (!validInput);
 
 	do
 	{
 		std::cout << "entre colonne (un numero) entre " << 1 << "-" << HEIGHT << std::endl;
 		std::getline(std::cin, inputString);
 
-		ValidInput = true;
+		validInput = true;
 
 		if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
 		{
 			std::cout << inputString << " n'est pas un nombre" << std::endl;
-			ValidInput = false;
+			validInput = false;
 		}
 
-		if (ValidInput)
+		if (validInput)
 		{
 			y = std::stoi(inputString);
 			if (y > HEIGHT) y = HEIGHT;
 			if (y < 1) y = 1;
 		}
 
-	} while (!ValidInput);
+	} while (!validInput);
 
 	return (x - 1) * HEIGHT + (y - 1);
 }
 
 
 //Condition de Victoire
-bool compar(int indexresult)
+bool Compar(int indexresult)
 {
-	if (coffre[indexresult] == tile::coffre_tresor)
+	if (Chest[indexresult] == tile::coffre_tresor)
 	{
-		affichage_plateau[indexresult] = 2;
+		GamePlayer[indexresult] = 2;
 		std::cout << "        ..::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..        " << std::endl;
 		std::cout << "    .-#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#=.    " << std::endl;
 		std::cout << "  .+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+.  " << std::endl;
@@ -119,7 +119,7 @@ bool compar(int indexresult)
 		std::cout << "Tu as trouve le Tresor tu as gagne" << std::endl;
 		return true;
 	}
-	affichage_plateau[indexresult] = 1;
+	GamePlayer[indexresult] = 1;
 	std::cout << "Rien trouve" << std::endl;
 	return false;
 

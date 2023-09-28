@@ -10,23 +10,25 @@ int main()
 {
 
 	std::string temp;
-	int result = (WIDTH * HEIGHT) / 2;
-	bool(treasurefound);
+	constexpr int result = (WIDTH * HEIGHT) / 2;
+	bool treasureFound;
 	int a = 0;
 	random();
 	draw_game();
 
 	do
 	{
-		treasurefound = compar(coordonnees());
+		
+		treasureFound = Compar(Coordinate());
 		draw_game();
+		
 		a++;
 		if (a >= result)
 		{
 			std::cout << "Tu as perdu retente ta chance" << std::endl;
-			treasurefound = true;
+			treasureFound = true;
 		}
-	} while (treasurefound == false);
+	} while (treasureFound == false);
 
 
 	std::cout << "appuyez sur entre pour quitter" << std::endl;

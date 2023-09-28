@@ -3,25 +3,25 @@
 #include <iostream>
 #include "Map.h"
 
-int coffre[WIDTH * HEIGHT];
-int affichage_plateau[WIDTH * HEIGHT];
+int Chest[WIDTH * HEIGHT];
+int GamePlayer[WIDTH * HEIGHT];
 
 //random
 void random()
 {
 	srand(time(0));
-	int idxRandom = rand() % WIDTH * HEIGHT;
-	coffre[idxRandom] = 1;
+	int idxRandom = rand() % (WIDTH * HEIGHT);
+	Chest[idxRandom] = 1;
 	/*while (true)
 	{
 		srand(time(0));
 		int idxRandom = rand() % (WIDTH * HEIGHT);
-		coffre[idxRandom] = 1;
+		Chest[idxRandom] = 1;
 		std::cout << idxRandom << std::endl;
 	}*/
 }
 
-bool check_tresor_at_coodone(int x, int y)
+bool CheckTresorAtCoodone(int x, int y)
 {
 	if (x < 0 || x >= HEIGHT)
 	{
@@ -31,7 +31,7 @@ bool check_tresor_at_coodone(int x, int y)
 	{
 		return 0;
 	}
-	return coffre[(x)*HEIGHT + (y)];
+	return Chest[(x)*HEIGHT + (y)];
 }
 
 //Dessin
@@ -41,27 +41,27 @@ void draw_game()
 	{
 		for (int column = 0; column < WIDTH; column++)
 		{
-			int case_state = affichage_plateau[row * WIDTH + column];
-			if (case_state == 1)
+			int caseState = GamePlayer[row * WIDTH + column];
+			if (caseState == 0)
 			{
 				std::cout << '-';
 			}
-			else if (case_state == 0)
+			else if (caseState == 1)
 			{
 				int adjTresor = 0;
-				if (check_tresor_at_coodone(row, column - 1))
+				if (CheckTresorAtCoodone(row, column - 1))
 				{
 					adjTresor++;
 				}
-				if (check_tresor_at_coodone(row, column + 1))
+				if (CheckTresorAtCoodone(row, column + 1))
 				{
 					adjTresor++;
 				}
-				if (check_tresor_at_coodone(row - 1, column))
+				if (CheckTresorAtCoodone(row - 1, column))
 				{
 					adjTresor++;
 				}
-				if (check_tresor_at_coodone(row + 1, column))
+				if (CheckTresorAtCoodone(row + 1, column))
 				{
 					adjTresor++;
 				}

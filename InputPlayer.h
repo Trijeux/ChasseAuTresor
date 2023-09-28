@@ -1,4 +1,4 @@
 #pragma once
 
-int coordonnees();
-bool compar(int indexresult);
+int Coordinate();
+bool Compar(int indexresult);
