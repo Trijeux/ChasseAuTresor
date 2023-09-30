@@ -9,6 +9,7 @@
 int Coordinate()
 {
 	bool validInput = true;
+	bool validNumber = false;
 	std::string inputString;
 
 	//ligne x
@@ -19,22 +20,29 @@ int Coordinate()
 
 	do
 	{
-		std::cout << "entre ligne (un numero) entre " << 1 << "-" << WIDTH << std::endl;
-		std::getline(std::cin, inputString);
-
-		validInput = true;
-
-		if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
+		do
 		{
-			std::cout << inputString << " n'est pas un nombre" << std::endl;
-			validInput = false;
-		}
-		if (validInput)
-		{
-			x = std::stoi(inputString);
-			if (x > WIDTH) x = WIDTH;
-			if (x < 1) x = 1;
-		}
+			validNumber = false;
+			std::cout << "entre ligne (un numero) entre " << 1 << "-" << WIDTH << std::endl;
+			std::getline(std::cin, inputString);
+
+			validInput = true;
+
+			if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
+			{
+				std::cout << inputString << " n'est pas un nombre" << std::endl;
+				validInput = false;
+			}
+			if (validInput)
+			{
+				x = std::stoi(inputString);
+				if (x > WIDTH || x < 1)
+				{
+					validNumber = true;
+					std::cout << "Ce n'es pas un chiffre entre 1-" << WIDTH << std::endl;
+				}
+			}
+		} while (validNumber);
 
 	} while (!validInput);
 
