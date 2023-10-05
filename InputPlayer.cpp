@@ -5,29 +5,34 @@
 #include "InputPlayer.h"
 
 
-//Coordonnees
 int Coordinate()
 {
+#pragma region Variable Local
 	bool validInput = true;
 	bool validNumber = false;
+
+	//Input Player
 	std::string inputString;
 
-	//ligne x
+	//Row x
 	unsigned int x = 0;
 
-	//colonne y
+	//Column y
 	unsigned int y = 0;
+#pragma endregion
 
+#pragma region Input Row Column
+	//Input Row
 	do
 	{
 		do
 		{
+			validInput = true;
 			validNumber = false;
 			std::cout << "entre ligne (un numero) entre " << 1 << "-" << WIDTH << std::endl;
 			std::getline(std::cin, inputString);
 
-			validInput = true;
-
+			// Check if it's a number or not
 			if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
 			{
 				std::cout << inputString << " n'est pas un nombre" << std::endl;
@@ -35,47 +40,59 @@ int Coordinate()
 			}
 			if (validInput)
 			{
+				// Checks if number is between 1 and array size
 				x = std::stoi(inputString);
-				if (x > WIDTH || x < 1)
+				if (x > WIDTH || x  < 1)
 				{
 					validNumber = true;
-					std::cout << "Ce n'es pas un chiffre entre 1-" << WIDTH << std::endl;
+					std::cout << "Ce n'est pas un chiffre entre 1-" << WIDTH << std::endl;
 				}
 			}
 		} while (validNumber);
 
 	} while (!validInput);
 
+	//Input Column
 	do
 	{
-		std::cout << "entre colonne (un numero) entre " << 1 << "-" << HEIGHT << std::endl;
-		std::getline(std::cin, inputString);
-
-		validInput = true;
-
-		if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
+		do
 		{
-			std::cout << inputString << " n'est pas un nombre" << std::endl;
-			validInput = false;
-		}
+			validInput = true;
+			validNumber = false;
+			std::cout << "entre colonne (un numero) entre " << 1 << "-" << HEIGHT << std::endl;
+			std::getline(std::cin, inputString);
 
-		if (validInput)
-		{
-			y = std::stoi(inputString);
-			if (y > HEIGHT) y = HEIGHT;
-			if (y < 1) y = 1;
-		}
+			// Check if it's a number or not
+			if (inputString.length() == 0 || !std::all_of(inputString.begin(), inputString.end(), ::isdigit))
+			{
+				std::cout << inputString << " n'est pas un nombre" << std::endl;
+				validInput = false;
+			}
 
+			if (validInput)
+			{
+				// Checks if number is between 1 and array size
+				y = std::stoi(inputString);
+				if (y > WIDTH || y < 1)
+				{
+					validNumber = true;
+					std::cout << "Ce n'est pas un chiffre entre 1-" << WIDTH << std::endl;
+				}
+			}
+		}
+		while (validNumber);
 	} while (!validInput);
 
+	//Return coordinates
 	return (x - 1) * HEIGHT + (y - 1);
+#pragma endregion
 }
 
 
-//Condition de Victoire
 bool Compar(int indexresult)
 {
-	if (Chest[indexresult] == tile::coffre_tresor)
+	// Check if at the coordinate there is the treasure chest
+	if (Chest[indexresult] == tile::TreasureChest)
 	{
 		system("cls");
 		GamePlayer[indexresult] = 2;
@@ -132,4 +149,66 @@ bool Compar(int indexresult)
 	std::cout << "Rien trouve" << std::endl;
 	return false;
 
+}
+
+
+int Dificulty()
+{
+#pragma region Variable Local
+	int dificulty;
+	int dificultyNumber;
+	std::string dificultychoose;
+	bool inputFalse = true;
+	bool validInput = true;
+#pragma endregion
+
+	std::cout << "Choisi ta difficulte pour le jeu : (1)facile 15 essai, (2)normal 10 essai, (3)Difficile 5 essai" << std::endl;
+
+#pragma region Input Difficulty
+	// Check if it's a number or not
+	do
+	{
+		do
+		{
+			std::getline(std::cin, dificultychoose);
+
+			validInput = true;
+
+			if (dificultychoose.length() == 0 || !std::all_of(dificultychoose.begin(), dificultychoose.end(), ::isdigit))
+			{
+				system("cls");
+				std::cout << dificultychoose << " n'est pas un chiffre! entre : (1)facile 15 essai, (2)normal 10 essai, (3)Difficile 5 essai" << std::endl;
+				validInput = false;
+			}
+
+			if (validInput)
+			{
+				dificultyNumber = std::stoi(dificultychoose);
+			}
+		}
+		while (!validInput);
+
+		//Checks if the number is between 1 and 3
+		if (dificultyNumber < 1 || dificultyNumber > 3)
+		{
+			system("cls");
+			std::cout << "entrer invalide entre : (1)facile 15 essai, (2)normal 10 essai, (3)Difficile 5 essai" << std::endl;
+		}
+		else
+		{
+			inputFalse = false;
+		}
+	} while (inputFalse);
+#pragma endregion
+
+	// Set the number of tests according to the chosen difficulty and print the choice
+	if (dificultyNumber == 1) dificulty = 15;
+	if (dificultyNumber == 2) dificulty = 10;
+	if (dificultyNumber == 3) dificulty = 5;
+	system("cls");
+	if (dificultyNumber == 1) std::cout << "Mode Facile" << std::endl;
+	if (dificultyNumber == 2) std::cout << "Mode Normal" << std::endl;
+	if (dificultyNumber == 3) std::cout << "Mode Difficile" << std::endl;
+
+	return dificulty;
 }

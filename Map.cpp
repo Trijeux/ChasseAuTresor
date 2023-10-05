@@ -3,40 +3,24 @@
 #include <iostream>
 #include "Map.h"
 
+//Map 
 int Chest[WIDTH * HEIGHT];
 int GamePlayer[WIDTH * HEIGHT];
 
-//random
+
 void random()
 {
+	// Creates a random seed
 	srand(time(0));
+	// Create a random number of the size of the map
 	int idxRandom = rand() % (WIDTH * HEIGHT);
+	// Place the chest on the map
 	Chest[idxRandom] = 1;
-	/*while (true)
-	{
-		srand(time(0));
-		int idxRandom = rand() % (WIDTH * HEIGHT);
-		Chest[idxRandom] = 1;
-		std::cout << idxRandom << std::endl;
-	}*/
 }
 
-bool CheckTresorAtCoodone(int x, int y)
-{
-	if (x < 0 || x >= HEIGHT)
-	{
-		return 0;
-	}
-	if (y < 0 || y >= HEIGHT)
-	{
-		return 0;
-	}
-	return Chest[(x)*HEIGHT + (y)];
-}
-
-//Dessin
 void draw_game()
 {
+	// Draw line by line
 	for (int row = 0; row < HEIGHT; row++)
 	{
 		for (int column = 0; column < WIDTH; column++)
@@ -46,6 +30,7 @@ void draw_game()
 			{
 				std::cout << '-';
 			}
+			// Check if there is a safe nearby
 			else if (caseState == 1)
 			{
 				int adjTresor = 0;
@@ -74,4 +59,17 @@ void draw_game()
 		}
 		std::cout << '\n';
 	}
+}
+
+bool CheckTresorAtCoodone(int x, int y)
+{
+	if (x < 0 || x >= HEIGHT)
+	{
+		return 0;
+	}
+	if (y < 0 || y >= HEIGHT)
+	{
+		return 0;
+	}
+	return Chest[(x)*HEIGHT + (y)];
 }
