@@ -10,12 +10,16 @@ int GamePlayer[WIDTH * HEIGHT];
 
 void random()
 {
-	// Creates a random seed
-	srand(time(0));
-	// Create a random number of the size of the map
-	int idxRandom = rand() % (WIDTH * HEIGHT);
-	// Place the chest on the map
-	Chest[idxRandom] = 1;
+	//while (true)
+	//{
+		// Creates a random seed
+		srand(time(0));
+		// Create a random number of the size of the map
+		int idxRandom = rand() % (100);
+		// Place the chest on the map
+		Chest[idxRandom] = 1;
+		//std::cout << idxRandom << std::endl;
+	//}
 }
 
 void draw_game()
